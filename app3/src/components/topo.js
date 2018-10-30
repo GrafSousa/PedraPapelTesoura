@@ -4,12 +4,13 @@ import {
   View
 } from 'react-native';
 
+const imagem = require('../../imgs/jokenpo.png');
 
 class Topo extends Component {
   render() {
-    return(
+    return (
       <View>
-          <Image source={require('../../imgs/jokenpo.png')} resizeMode='stretch' style={{width:'100%'}}/>
+          <Image source={imagem} resizeMode='stretch' style={{ width: '100%' }} />
         </View>
     );
   }
