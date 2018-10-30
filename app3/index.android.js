@@ -1,53 +1,87 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
   Text,
+  Button,
   View
 } from 'react-native';
 
-export default class app3 extends Component {
+class app3 extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = { escolhaUsuario : '', escolhaComputador : ''};
+  }
+
+  jokenpo(escolhaUsuario) {
+    var numAleatorio = Math.floor(Math.random() * 3);
+
+    var escolhaComputador = '';
+
+    var resultado = '';
+
+    switch(numAleatorio){
+      case 0: escolhaComputador = 'pedra'; break;
+      case 1: escolhaComputador = 'papel'; break;
+      case 2: escolhaComputador = 'tesoura'; break;
+    }
+
+    if (escolhaComputador == 'pedra') {
+      if (escolhaUsuario == 'pedra') {
+        resultado = 'Empate';
+      }
+      else if (escolhaUsuario == 'papel') {
+        resultado = 'Ganhou';
+      }
+      else {
+        resultado = 'Perdeu';
+      }
+    }
+    else if (escolhaComputador == 'papel') {
+      if (escolhaUsuario == 'pedra') {
+        resultado = 'Perdeu';
+      }
+      else if (escolhaUsuario == 'papel') {
+        resultado = 'Empate';
+      }
+      else {
+        resultado = 'Ganhou';
+      } 
+    }
+    else {
+      if (escolhaUsuario == 'pedra') {
+        resultado = 'Ganhou';
+      }
+      else if (escolhaUsuario == 'papel') {
+        resultado = 'Perdeu';
+      }
+      else {
+        resultado = 'Empate';
+      }
+
+    }
+
+    this.setState({ escolhaUsuario : escolhaUsuario,
+                    escolhaComputador : escolhaComputador,
+                    resultado : resultado
+                  });
+  }
+  
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
+      <View>
+        <Text>Escolha do computador: {this.state.escolhaComputador}</Text>        
+        <Text>Escolha do usuário: {this.state.escolhaUsuario}</Text>
+        <Text>Resultado: {this.state.resultado}</Text>
+
+        <Button title='pedra' onPress={ () => {this.jokenpo('pedra')}} />
+        <Button title='papel' onPress={ () => {this.jokenpo('papel')}}/>        
+        <Button title='tesoura' onPress={ () => {this.jokenpo('tesoura')}}/>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 AppRegistry.registerComponent('app3', () => app3);
